@@ -1,6 +1,5 @@
-tdp_home = ${TDP_HOME}
+${TDP_HOME}
 中文
 
 tdp_home = %TDP_HOME%
 En
-

@@ -1,3 +1,3 @@
-module git.taiji.com.cn/tdp/replace
+module github.com/qiuzhanghua/replace
 
 go 1.17

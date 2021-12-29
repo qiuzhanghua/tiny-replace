@@ -5,18 +5,13 @@ import (
 	"io/ioutil"
 	"os"
 	"regexp"
-	"runtime"
 	"strings"
 )
 
 var regex *regexp.Regexp
 
 func init() {
-	if runtime.GOOS == "Windows" {
-		regex = regexp.MustCompile("[%].+[%]")
-	} else {
-		regex = regexp.MustCompile("\\$\\{.+\\}")
-	}
+	regex = regexp.MustCompile("$?[{%].+[}%]")
 }
 
 func main() {
@@ -25,20 +20,33 @@ func main() {
 		os.Exit(0)
 	}
 	filename := os.Args[1]
-	// filename = ReplaceString(filename)
+	// filename = ReplaceString(filename)  //perhaps needed
 	f, err := ioutil.ReadFile(filename)
 	AssetNil(err)
 	content := string(f)
+	fmt.Println(content)
 	c2 := ReplaceString(content)
 	err = ioutil.WriteFile(filename, []byte(c2), 0644)
 	AssetNil(err)
+	fmt.Println(c2)
 	os.Exit(0)
 }
 
 func ReplaceString(s string) string {
 	envs := regex.FindAllString(s, -1)
+	if len(envs) == 0 {
+		return s
+	}
 	for _, e := range envs {
-		e2 := e[2 : len(e)-1]
+		if len(e) < 3 {
+			continue
+		}
+		var e2 string
+		if strings.HasPrefix(e, "$") {
+			e2 = e[2 : len(e)-1]
+		} else {
+			e2 = e[1 : len(e)-1]
+		}
 		env := os.Getenv(e2)
 		s = strings.ReplaceAll(s, e, env)
 	}

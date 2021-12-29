@@ -1,2 +1,6 @@
-tdp_home = /Users/q/tdp
+tdp_home = ${TDP_HOME}
 中文
+
+tdp_home = %TDP_HOME%
+En
+

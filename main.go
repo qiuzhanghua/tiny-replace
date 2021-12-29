@@ -11,7 +11,7 @@ import (
 var regex *regexp.Regexp
 
 func init() {
-	regex = regexp.MustCompile("[$][{].+[}]|[%].+[%]")
+	regex = regexp.MustCompile("[$][{].+?[}]|[%].+?[%]")
 	// "[$]?[{%].+[}%]"
 }
 

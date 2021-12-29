@@ -11,7 +11,8 @@ import (
 var regex *regexp.Regexp
 
 func init() {
-	regex = regexp.MustCompile("[$]?[{%].+[}%]")
+	regex = regexp.MustCompile("[$][{].+?[}]|[%].+?[%]")
+	// "[$]?[{%].+[}%]"
 }
 
 func main() {
@@ -24,11 +25,9 @@ func main() {
 	f, err := ioutil.ReadFile(filename)
 	AssetNil(err)
 	content := string(f)
-	//fmt.Println(content)
 	c2 := ReplaceString(content)
 	err = ioutil.WriteFile(filename, []byte(c2), 0644)
 	AssetNil(err)
-	//fmt.Println(c2)
 	os.Exit(0)
 }
 

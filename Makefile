@@ -22,4 +22,4 @@ post:
 	git restore autotag.go
 
 clean:
-	rm tdp_replace_*.*
+	rm -rf Tiny-replace

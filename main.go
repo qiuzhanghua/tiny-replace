@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"regexp"
+	"runtime"
 	"strings"
 )
 
@@ -47,6 +48,10 @@ func ReplaceString(s string) string {
 			e2 = e[1 : len(e)-1]
 		}
 		env := os.Getenv(e2)
+		if runtime.GOOS == "windows" {
+			env = strings.ReplaceAll(env, "\\", "\\\\")
+
+		}
 		s = strings.ReplaceAll(s, e, env)
 	}
 	return s

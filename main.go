@@ -26,15 +26,22 @@ func main() {
 	f, err := ioutil.ReadFile(filename)
 	AssetNil(err)
 	content := string(f)
-	c2 := ReplaceString(content)
+	c2 := ReplaceString(content, os.Args[1:]...)
 	err = ioutil.WriteFile(filename, []byte(c2), 0644)
 	AssetNil(err)
 	os.Exit(0)
 }
 
-func ReplaceString(s string) string {
+func ReplaceString(s string, rep ...string) string {
+	m := make(map[string]string, len(rep))
+	for _, r := range rep {
+		arr := strings.Split(r, "=")
+		if len(arr) == 2 {
+			m[strings.TrimSpace(arr[0])] = strings.TrimSpace(arr[1])
+		}
+	}
 	envs := regex.FindAllString(s, -1)
-	if len(envs) == 0 {
+	if len(envs) == 0 && len(m) == 0 {
 		return s
 	}
 	for _, e := range envs {
@@ -47,12 +54,19 @@ func ReplaceString(s string) string {
 		} else {
 			e2 = e[1 : len(e)-1]
 		}
-		env := os.Getenv(e2)
-		if runtime.GOOS == "windows" {
-			env = strings.ReplaceAll(env, "\\", "\\\\")
+		if len(m) > 0 {
+			val, ok := m[e2]
+			if ok {
+				s = strings.ReplaceAll(s, e, val)
+			}
+		} else {
+			env := os.Getenv(e2)
+			if runtime.GOOS == "windows" {
+				env = strings.ReplaceAll(env, "\\", "\\\\")
 
+			}
+			s = strings.ReplaceAll(s, e, env)
 		}
-		s = strings.ReplaceAll(s, e, env)
 	}
 	return s
 }

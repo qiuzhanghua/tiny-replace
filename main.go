@@ -22,6 +22,10 @@ func main() {
 		os.Exit(0)
 	}
 	filename := os.Args[1]
+	if filename == "version" {
+		fmt.Printf("%s %s (%s %s)\n", "tiny-replace", AppVersion, AppRevision, AppBuildDate)
+		os.Exit(0)
+	}
 	// filename = ReplaceString(filename)  //perhaps needed
 	f, err := ioutil.ReadFile(filename)
 	AssetNil(err)

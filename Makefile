@@ -4,7 +4,8 @@ pre:
 	autotag write
 
 build:
-	go build
+	mkdir -p bin
+	go build -o bin/tiny-replace
 
 build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o tiny-replace_`autotag current`_linux_arm64
@@ -25,5 +26,5 @@ post:
 	git restore autotag.go
 
 clean:
+	rm -rf bin
 	rm tiny-replace*.*
-	rm tiny-replace

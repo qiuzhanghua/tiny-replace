@@ -2,7 +2,7 @@ module github.com/qiuzhanghua/tiny-replace
 
 go 1.17
 
-require github.com/qiuzhanghua/common v0.3.0
+require github.com/qiuzhanghua/common v0.4.1
 
 require (
 	github.com/labstack/gommon v0.4.1 // indirect

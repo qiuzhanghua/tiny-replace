@@ -68,10 +68,10 @@ func ReplaceString(s string, rep ...string) string {
 			if !ok {
 				continue
 			}
-			if runtime.GOOS == "windows" {
-				env = strings.ReplaceAll(env, "\\", "\\\\")
-
-			}
+			// not needed ???
+			// if runtime.GOOS == "windows" {
+			// 	env = strings.ReplaceAll(env, "\\", "\\\\")
+			// }
 			s = strings.ReplaceAll(s, e, env)
 		}
 	}

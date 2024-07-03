@@ -11,8 +11,18 @@ build-linux:
 	CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o tiny-replace_`autotag current`_linux_arm64
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o tiny-replace_`autotag current`_linux_amd64
 	CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -o tiny-replace_`autotag current`_linux_386
+
+	
+
+ build-loong64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=mipsle go build -o tiny-replace_`autotag current`_linux.mipsle
+	CGO_ENABLED=0 GOOS=linux GOARCH=mips64le go build -o tiny-replace_`autotag current`_linux.mips64le
 	CGO_ENABLED=0 GOOS=linux GOARCH=loong64 go build -o tiny-replace_`autotag current`_linux_loong64
 
+build-freebsd:
+	CGO_ENABLED=0 GOOS=freebsd GOARCH=arm64 go build -o tiny-replace_`autotag current`_freebsd_arm64
+	CGO_ENABLED=0 GOOS=freebsd GOARCH=amd64 go build -o tiny-replace_`autotag current`_freebsd_amd64
+	CGO_ENABLED=0 GOOS=freebsd GOARCH=386 go build -o tiny-replace_`autotag current`_freebsd_386
 
 build-darwin:
 	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o tiny-replace_`autotag current`_darwin_amd64

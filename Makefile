@@ -1,4 +1,4 @@
-all: pre build build-linux build-darwin build-windows post
+all: pre build build-darwin build-windows build-linux build-freebsd build-loong64  post
 
 pre:
 	autotag write

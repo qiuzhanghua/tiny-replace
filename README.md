@@ -21,3 +21,15 @@ tdp_home = ${TDP_HOME}
 tdp_home = /Users/q/tdp
 中文
 ```
+
+## 参数
+
+```bash
+// 将 \ 替换为 /
+tiny-replace -s filename 
+// 将 / 替换为 \
+tiny-replace -b filename
+// 将 \ 替换为 \\
+tiny-replace -d filename
+
+```

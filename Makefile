@@ -30,6 +30,7 @@ build-darwin:
 
 build-windows:
 	CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o tiny-replace_`autotag current`_windows_amd64.exe
+	CGO_ENABLED=0 GOOS=windows GOARCH=arm64 go build -o tiny-replace_`autotag current`_windows_arm64.exe
 	CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o tiny-replace_`autotag current`_windows_386.exe
 
 post:
